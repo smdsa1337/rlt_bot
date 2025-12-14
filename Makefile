@@ -6,7 +6,7 @@ build:
 
 up:
 	docker compose $@ -d
-	docker exec -it rlt_bot-ollama-1 ollama run $(LLM_MODEL)
+	docker exec -it ollama ollama run $(LLM_MODEL)
 
 down:
 	docker compose $@ -v

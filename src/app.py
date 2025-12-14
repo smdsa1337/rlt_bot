@@ -39,7 +39,8 @@ class Application:
                                 likes_count=videos.get('likes_count'),
                                 reports_count=videos.get('reports_count'),
                                 comments_count=videos.get('comments_count'),
-                                creator_id=videos.get('creator_id')).on_conflict_do_nothing()
+                                creator_id=videos.get('creator_id'),
+                                created_at=datetime.fromisoformat(videos.get('created_at'))).on_conflict_do_nothing()
                         )
                         for snapshots in videos.get('snapshots'):
                             await connection.execute(
@@ -53,7 +54,8 @@ class Application:
                                     delta_views_count=snapshots.get('delta_views_count'),
                                     delta_likes_count=snapshots.get('delta_likes_count'),
                                     delta_reports_count=snapshots.get('delta_reports_count'),
-                                    delta_comments_count=snapshots.get('delta_comments_count')
+                                    delta_comments_count=snapshots.get('delta_comments_count'),
+                                    created_at=datetime.fromisoformat(snapshots.get('created_at'))
                                 ).on_conflict_do_nothing()
                             )
 
